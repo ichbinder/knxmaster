@@ -1,0 +1,25 @@
+{
+  "building": [
+    {
+      "id": "H",
+      "name": "Home"
+    }
+  ],
+  "room": [
+    {
+      "id": "112",
+      "buildingId": "H",
+      "name": "112"
+    }
+  ],
+  "funktion": [
+    {
+      "id": "1",
+      "roomId": "112",
+      "buildingId": "H",
+      "ga": "2/1/20",
+      "DPT": "DPT1",
+      "commit": "Hello"
+    }
+  ]
+}
