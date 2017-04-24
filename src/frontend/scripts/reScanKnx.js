@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Logger from './reLogger';
 
-axios.defaults.baseURL = 'http://localhost:8020/';
+axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
 
 export class ScanKnx extends React.Component {
   constructor( props ) {

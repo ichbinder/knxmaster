@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const exampleSocket = new WebSocket( 'ws://localhost:8020/api/getScanResoult' );
+const exampleSocket = new WebSocket( 'ws://playground.cm.htw-berlin.de:8020/api/getScanResoult' );
 
 export default class Logger extends React.Component {
   constructor( props ) {

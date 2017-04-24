@@ -4,7 +4,7 @@ import { GroupAddr } from './reGroupAddrEditor';
 import { ScanKnx } from './reScanKnx';
 import BusMonitor from './reBusMonitor';
 
-axios.defaults.baseURL = 'http://localhost:8020/';
+axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
 
 
 export class ReMain extends React.Component {
