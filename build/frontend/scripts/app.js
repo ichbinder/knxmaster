@@ -21829,7 +21829,7 @@
 	
 	    _this.state = {
 	      dpt: 'DPT1',
-	      groupAddr: '2/1/19',
+	      groupAddr: '2/0/50',
 	      value: '1'
 	    };
 	    _this._handleBtn1Change = _this._handleBtn1Change.bind(_this);
