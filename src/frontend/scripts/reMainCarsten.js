@@ -10,7 +10,7 @@ export class ReMainCarsten extends React.Component {
     this.state =
     {
       dpt: 'DPT1',
-      groupAddr: '2/1/19',
+      groupAddr: '2/0/50',
       value: '1'
     };
     this._handleBtn1Change = this._handleBtn1Change.bind( this );
