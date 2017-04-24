@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Logger from './reLogger';
 
-axios.defaults.baseURL = 'http://localhost:8006/';
+axios.defaults.baseURL = 'http://localhost:8020/';
 
 export class ScanKnx extends React.Component {
   constructor( props ) {
