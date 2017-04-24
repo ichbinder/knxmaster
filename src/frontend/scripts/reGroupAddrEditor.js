@@ -4,7 +4,7 @@ import Ga100x from './reGa100x';
 import Ga300x from './reGa300x';
 import Ga500x from './reGa500x';
 
-const SERVER_URL = 'http://localhost:8005';
+const SERVER_URL = 'http://localhost:8006';
 
 export class GroupAddr extends React.Component {
   constructor( props ) {

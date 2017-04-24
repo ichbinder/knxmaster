@@ -21817,7 +21817,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	_axios2.default.defaults.baseURL = 'http://localhost:8005/';
+	_axios2.default.defaults.baseURL = 'http://localhost:8006/';
 	
 	var ReMainCarsten = exports.ReMainCarsten = function (_React$Component) {
 	  _inherits(ReMainCarsten, _React$Component);
@@ -25471,7 +25471,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	_axios2.default.defaults.baseURL = 'http://localhost:8005/';
+	_axios2.default.defaults.baseURL = 'http://localhost:8006/';
 	
 	var ReMain = exports.ReMain = function (_React$Component) {
 	  _inherits(ReMain, _React$Component);
@@ -25632,7 +25632,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var SERVER_URL = 'http://localhost:8005';
+	var SERVER_URL = 'http://localhost:8006';
 	
 	var GroupAddr = exports.GroupAddr = function (_React$Component) {
 	  _inherits(GroupAddr, _React$Component);
@@ -35264,7 +35264,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	_axios2.default.defaults.baseURL = 'http://localhost:8005/';
+	_axios2.default.defaults.baseURL = 'http://localhost:8006/';
 	
 	var ScanKnx = exports.ScanKnx = function (_React$Component) {
 	  _inherits(ScanKnx, _React$Component);
@@ -35375,7 +35375,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var exampleSocket = new WebSocket('ws://localhost:8005/api/getScanResoult');
+	var exampleSocket = new WebSocket('ws://localhost:8006/api/getScanResoult');
 	
 	var Logger = function (_React$Component) {
 	  _inherits(Logger, _React$Component);
@@ -35478,7 +35478,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var socket = new WebSocket('ws://localhost:8005/api/busMonitor');
+	var socket = new WebSocket('ws://localhost:8006/api/busMonitor');
 	
 	var BusMonitor = function (_React$Component) {
 	  _inherits(BusMonitor, _React$Component);

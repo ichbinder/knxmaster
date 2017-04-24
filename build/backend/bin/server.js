@@ -38,7 +38,7 @@ var expressWs = (0, _expressWs2.default)((0, _express2.default)());
 var app = expressWs.app;
 // const app = express();
 
-app.set('port', process.env.PORT || 8005);
+app.set('port', process.env.PORT || 8006);
 
 // laden den bodyParser
 app.use(_bodyParser2.default.urlencoded({ extended: true }));

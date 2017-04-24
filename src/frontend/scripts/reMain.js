@@ -4,7 +4,7 @@ import { GroupAddr } from './reGroupAddrEditor';
 import { ScanKnx } from './reScanKnx';
 import BusMonitor from './reBusMonitor';
 
-axios.defaults.baseURL = 'http://localhost:8005/';
+axios.defaults.baseURL = 'http://localhost:8006/';
 
 
 export class ReMain extends React.Component {

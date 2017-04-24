@@ -11,7 +11,7 @@ const expressWs = eWs( express() );
 const app = expressWs.app;
 // const app = express();
 
-app.set( 'port', process.env.PORT || 8005 );
+app.set( 'port', process.env.PORT || 8006 );
 
 // laden den bodyParser
 app.use( bodyParser.urlencoded( { extended: true } ) );

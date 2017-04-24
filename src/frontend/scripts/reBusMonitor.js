@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const socket = new WebSocket( 'ws://localhost:8005/api/busMonitor' );
+const socket = new WebSocket( 'ws://localhost:8006/api/busMonitor' );
 
 export default class BusMonitor extends React.Component {
   constructor( props ) {
