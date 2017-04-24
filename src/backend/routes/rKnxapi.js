@@ -13,7 +13,7 @@ const IP = '141.45.187.88';
 const dbKnxBus = low( './knxbusDB.json' );
 // const dbApi = low( './knxapiDB.json' );
 
-const dptTable = { DPT1: 0, 'DPT3.007': 3, 'DPT5.004': 7 };
+const dptTable = { DPT1: 0, DPT3: 3, DPT5: 7 };
 
 dbKnxBus.defaults( { pas: [], building: [] } )
   .write();
@@ -27,7 +27,7 @@ export default function create( ) {
         connection.write( req.body.ga, req.body.value, req.body.dpt );
         let timeOut = false;
         setTimeout( () => { timeOut = true; res.json( { error: 'no connection.' } ); }, 3000 );
-        connection.on( 'GroupValue_Response_1/1/24', ( src, value ) => {
+        connection.on( 'GroupValue_Response', ( src, value ) => {
           console.log( 'src', src, 'valueDPT', value );
         } );
         connection.read( req.body.ga, ( src, valueDPT ) => {

@@ -31,6 +31,7 @@ app.use( '/socket', rWebSocket() );
 
 app.use( jsonServer.defaults() );
 app.use( jsonServer.rewriter( {
+  '/:bId/:rId': '/funktion?buildingId=:bId&roomId=:rId'
 } ) );
 app.use( jsonServer.router( './apiDB.json' ) );
 

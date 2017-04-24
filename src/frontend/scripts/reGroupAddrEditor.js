@@ -11,7 +11,7 @@ export class GroupAddr extends React.Component {
     super( props );
     this.state = {
       building: {},
-      dptList: [ 'DPT1', 'DPT3.007', 'DPT5.004' ],
+      dptList: [ 'DPT1', 'DPT3', 'DPT5' ],
       selectDpt: 'DPT1',
       dptListRaw: [ '0', '3', '7' ]
     };

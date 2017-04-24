@@ -2699,5 +2699,30 @@
       }
     }
   ],
-  "building": []
+  "building": [
+    {
+      "ga": "2/1/9",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "110",
+      "funktion": "Jalusie",
+      "kommentar": "hoch und runter."
+    },
+    {
+      "ga": "1/1/2",
+      "DPT": "DPT3",
+      "gebaeude": "H",
+      "raum": "112",
+      "funktion": "Licht",
+      "kommentar": "test"
+    },
+    {
+      "ga": "2/1/19",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "110",
+      "funktion": "Jalusie",
+      "kommentar": "Hoch und Runter mit 1 und 0."
+    }
+  ]
 }

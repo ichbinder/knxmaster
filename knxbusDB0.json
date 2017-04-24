@@ -5,7 +5,7 @@
       "gebaeude": "W",
       "raum": "34",
       "kommentar": "test",
-      "DPT": "DPT3.007",
+      "DPT": "DPT3",
       "funktion": "Schater"
     },
     {
@@ -34,7 +34,7 @@
     },
     {
       "ga": "1/1/2",
-      "DPT": "DPT5.004",
+      "DPT": "DPT5",
       "gebaeude": "T",
       "raum": "67",
       "funktion": "Dimen",

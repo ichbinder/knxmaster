@@ -57,7 +57,9 @@ app.use('/web', _rFrontend2.default);
 app.use('/socket', (0, _rWebSocket2.default)());
 
 app.use(_jsonServer2.default.defaults());
-app.use(_jsonServer2.default.rewriter({}));
+app.use(_jsonServer2.default.rewriter({
+  '/:bId/:rId': '/funktion?buildingId=:bId&roomId=:rId'
+}));
 app.use(_jsonServer2.default.router('./apiDB.json'));
 
 // Error Handling

@@ -10,6 +10,8 @@ var router = new _express2.default.Router();
 
 router.get('/', function (req, res) {
   res.render('pIndex');
+}).get('/apitsday', function (req, res) {
+  res.render('pCarsten');
 });
 
 module.exports = router;
