@@ -1,0 +1,12 @@
+{
+  "ga": [
+    {
+      "ga": "2/1/19",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "112",
+      "funktion": "Jalousie",
+      "kommentar": "Sende 1 für hoch und 0 für herunter."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "ga": [
+    {
+      "ga": "1/1/1",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "112",
+      "funktion": "Licht",
+      "kommentar": "Test"
+    }
+  ]
+}
