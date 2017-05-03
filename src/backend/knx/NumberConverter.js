@@ -1,10 +1,14 @@
 
+// hex zu dezimal
 exports.hex2dez = ( hex ) => Number( parseInt( hex, 16 ).toString( 10 ) );
 
+// dezimal zu hex
 exports.dez2hex = ( dez ) => parseInt( dez, 10 ).toString( 16 );
 
+// binäer zu dezimal
 exports.bin2dez = ( bin ) => Number( parseInt( bin, 2 ).toString( 10 ) );
 
+// hex zu binäre
 exports.hex2bin = ( hex ) => {
   const hexLength = hex.length;
   let binTmp = parseInt( hex, 16 ).toString( 2 );
@@ -17,6 +21,7 @@ exports.hex2bin = ( hex ) => {
   return binTmp;
 };
 
+// binär zu hex
 exports.bin2hex = ( bin ) => {
   const binLength = bin.length;
   let hexTmp = parseInt( bin, 2 ).toString( 16 );

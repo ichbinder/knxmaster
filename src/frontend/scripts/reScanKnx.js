@@ -2,8 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import Logger from './reLogger';
 
-axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+// die URL zur Backend RestAPI um mit /api/getAllGaOfDPT die GA abzurufen
+// axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+axios.defaults.baseURL = 'http://localhost:8020/';
 
+/**
+  * Dies ist die Webseite die es ermöglicht den KNX-Bus auf Busteilnehmer zu Scannen
+**/
 export class ScanKnx extends React.Component {
   constructor( props ) {
     super( props );

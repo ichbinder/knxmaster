@@ -2,8 +2,16 @@ import fs from 'fs';
 import path from 'path';
 import num from './NumberConverter';
 
+/**
+  * Das auslesen der einzelenen GOA der Busteilnehmer wird in der Master arbeit genuaer
+  * erleutert. (Kapitel 4.6.3.3)
+**/
+
+// dies ist die Log-Datei. Alles was in dieser Log-Datei geschrieben wird wird ans
+// Scan PA Frontend gesendet.
 const FILE_TO_WATCH = path.resolve( __dirname, '../log/knxscan.log' );
 
+// die KNX-Busteilnehmer Mask's die gescannt werden können auf GOAT.
 const gaMask = {
   '0010': 1,
   '0011': 1,
@@ -21,12 +29,23 @@ const gaMask = {
   5705: 6
 };
 
+/**
+  * Diese Klasse Scannt den KAX-Busteilnehmer auf
+  * Gruppen Objekt Association Tabels und wertet diese aus ums sie in die JSON-Datenbanken
+  * zu Speicher.
+  * @param kNXMapWrapper ist die verbindung über KnxMap zum KNX-Busteilnehmer
+  * @param deviceDB die JSON-Datenbanken in die die Ergebnisse gespeichert werdne soll.
+**/
 export default class GroupObjectAssociationScanner {
   constructor( kNXMapWrapper, deviceDB ) {
     this.kNXMapWrapper = kNXMapWrapper;
     this.db = deviceDB;
   }
 
+  /**
+    * Diese Methode Iteriert über alle gefunden PA und öffnet die Jeweileige Methode
+    * um die GOAT aus den Jeweileige Speicherblöcken der Busteilnehmer zu hollen.
+  **/
   scanGrOAT() {
     return new Promise( ( resolve, reject ) => {
       let logText = `
@@ -89,6 +108,9 @@ export default class GroupObjectAssociationScanner {
     } );
   }
 
+  /**
+    * Realisation Type 1 werdne auf GOA gescant
+  **/
   _realisationType1( _this, devPa ) {
     return new Promise( ( resolve, reject ) => {
       let grAssocTabPtrTmp = null;
@@ -162,6 +184,9 @@ export default class GroupObjectAssociationScanner {
       } );
   }
 
+  /**
+    * Realisation Type 3 GrOATEasy 3 werdne auf GOA gescant
+  **/
   _realisationType3GrOATEasy3( _this, devPa ) {
     let goatMemoryAddressTmp = '';
     return _this.kNXMapWrapper.propertyValueRead( devPa, 7, 2 )
@@ -191,6 +216,12 @@ export default class GroupObjectAssociationScanner {
       } );
   }
 
+  /**
+    * Hier werden die GOAT aus dem Speicher der jeweiligen KNX-Busteilnehmer gelesen,
+    * da offt nur 12 HEX Strings auf einmal aus einem KNX-Busteilnehmer gelesen werden
+    * können, muss die zu lesende Megen aufgeteilt werden und geschaut werden ob
+    * sie grösser ist als 12.
+  **/
   _readGoatFromMemory( _this, memAddress, addressCount, devPa ) {
     return new Promise( ( resolve ) => {
       let gaResolve = '';
@@ -227,6 +258,10 @@ export default class GroupObjectAssociationScanner {
     } );
   }
 
+  /**
+    * Die gelesenen GA des jeweileigen KNX-Busteilnehmers werden in die Scann JSON-Datenbanken
+    * gespeichert.
+  **/
   _saveGoat( _this, memoryGoatDump, devPa, splitter ) {
     const countGa = memoryGoatDump.length / splitter;
     const goatArray = {};
@@ -246,6 +281,9 @@ export default class GroupObjectAssociationScanner {
     fs.writeFileSync( FILE_TO_WATCH, `Die GOA wurde gespeicher: ${goatArray}` );
   }
 
+  /**
+    * Adiert zu einem Memory Adresse eine wert um zu einer anderen Memory adresse zu kommen.
+  **/
   _addMemoryAddress( memAddress, dez ) {
     console.log( 'memAddress:', memAddress );
     fs.writeFileSync( FILE_TO_WATCH, `memAddress: ${memAddress}` );

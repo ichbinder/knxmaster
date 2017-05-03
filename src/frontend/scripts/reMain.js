@@ -1,12 +1,11 @@
 import React from 'react';
-import axios from 'axios';
 import { GroupAddr } from './reGroupAddrEditor';
 import { ScanKnx } from './reScanKnx';
 import BusMonitor from './reBusMonitor';
 
-axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
-
-
+/**
+  * Hier fängt alles an. Das haubt Modul von der Webseite von hier aus wird alles geladen.
+**/
 export class ReMain extends React.Component {
   constructor( props ) {
     super( props );

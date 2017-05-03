@@ -1,7 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 
-
+/**
+  * Dies ist eine Unter Modul von der Webseite reGroupAdrEditoe
+  * hierlassen sich alle GA die einen DPT1 haben bearbeiten.
+  * Folgende Einstellungen sind möglich:
+  * Gebäude, Raum, Funktion, Kommentar
+**/
 export default class GroupAddr extends React.Component {
   static get propTypes() {
     return {

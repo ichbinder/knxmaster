@@ -2,8 +2,16 @@ import fs from 'fs';
 import path from 'path';
 import num from './NumberConverter';
 
+/**
+  * Das auslesen der einzelenen GO der Busteilnehmer wird in der Master arbeit genuaer
+  * erleutert. (Kapitel 4.6.3.2)
+**/
+
+// dies ist die Log-Datei. Alles was in dieser Log-Datei geschrieben wird wird ans
+// Scan PA Frontend gesendet.
 const FILE_TO_WATCH = path.resolve( __dirname, '../log/knxscan.log' );
 
+// die KNX-Busteilnehmer Mask's die gescannt werden können auf GOAT.
 const gaMask = {
   '0010': 1,
   '0011': 1,
@@ -21,12 +29,23 @@ const gaMask = {
   5705: 6
 };
 
+/**
+  * Diese Klasse Scannt den KAX-Busteilnehmer auf
+  * Gruppen Objekt Tabels und wertet diese aus ums sie in die JSON-Datenbanken
+  * zu Speicher.
+  * @param kNXMapWrapper ist die verbindung über KnxMap zum KNX-Busteilnehmer
+  * @param deviceDB die JSON-Datenbanken in die die Ergebnisse gespeichert werdne soll.
+**/
 export default class GroupObjectScanner {
   constructor( kNXMapWrapper, deviceDB ) {
     this.kNXMapWrapper = kNXMapWrapper;
     this.db = deviceDB;
   }
 
+  /**
+    * Diese Methode Iteriert über alle gefunden PA und öffnet die Jeweileige Methode
+    * um die GOT aus den Jeweileige Speicherblöcken der Busteilnehmer zu hollen.
+  **/
   scanGrOT() {
     return new Promise( ( resolve ) => {
       let logText = `
@@ -91,6 +110,9 @@ export default class GroupObjectScanner {
     } );
   }
 
+  /**
+    * Realisation Type 1 werdne auf GO gescant
+  **/
   _realisationType1( _this, devPa ) {
     let grAssocTabPtrTmp = null;
     return _this.kNXMapWrapper.memoryRead( devPa, '0x0112', 1 )
@@ -140,6 +162,9 @@ export default class GroupObjectScanner {
       } );
   }
 
+  /**
+    * Realisation Type 7 werdne auf GOA gescant
+  **/
   _realisationType7( _this, devPa ) {
     let gotMemoryAddressTmp = '';
     return _this.kNXMapWrapper.propertyValueRead( devPa, 7, 3 )
@@ -169,6 +194,9 @@ export default class GroupObjectScanner {
       } );
   }
 
+  /**
+    * Realisation Type 3 GrOTEasy 2 werdne auf GO gescant
+  **/
   _realisationType3GrOTEasy2( _this, devPa ) {
     let gaMemoryAddressTmp = '';
     return _this.kNXMapWrapper.propertyValueRead( devPa, 7, 3 )
@@ -211,6 +239,9 @@ export default class GroupObjectScanner {
       } );
   }
 
+  /**
+    * Realisation Type 3 GrOTEasy 3 werdne auf GO gescant
+  **/
   _realisationType3GrOTEasy3( _this, devPa ) {
     return new Promise( ( resolve, reject ) => {
       let gaMemoryAddressTmp = '';
@@ -257,6 +288,12 @@ export default class GroupObjectScanner {
     } );
   }
 
+  /**
+    * Hier werden die GOT aus dem Speicher der jeweiligen KNX-Busteilnehmer gelesen,
+    * da offt nur 12 HEX Strings auf einmal aus einem KNX-Busteilnehmer gelesen werden
+    * können, muss die zu lesende Megen aufgeteilt werden und geschaut werden ob
+    * sie grösser ist als 12.
+  **/
   _readGotFromMemory( _this, memAddress, addressCount, devPa ) {
     return new Promise( ( resolve ) => {
       let gaResolve = '';
@@ -293,6 +330,10 @@ export default class GroupObjectScanner {
     } );
   }
 
+  /**
+    * Die gelesenen GO des jeweileigen KNX-Busteilnehmers werden in die Scann JSON-Datenbanken
+    * gespeichert.
+  **/
   _saveGot( _this, memoryGrotDump, devPa, splitter ) {
     const countGOT = memoryGrotDump.length / splitter;
     const grotArray = [];
@@ -309,6 +350,10 @@ export default class GroupObjectScanner {
     fs.writeFileSync( FILE_TO_WATCH, `Die GO wurde gespeicher: ${grotArray}` );
   }
 
+  /**
+    * Die gelesenen GA aus einem RT1 des jeweileigen KNX-Busteilnehmers werden
+    * in die Scann JSON-Datenbanken gespeichert.
+  **/
   _saveGotRT1( _this, memoryGrotDump, devPa, splitter ) {
     const countGOT = memoryGrotDump.length / splitter;
     const grotArray = [];
@@ -325,6 +370,9 @@ export default class GroupObjectScanner {
     fs.writeFileSync( FILE_TO_WATCH, `Die GO wurde gespeicher: ${grotArray}` );
   }
 
+  /**
+    * Adiert zu einem Memory Adresse eine wert um zu einer anderen Memory adresse zu kommen.
+  **/
   _addMemoryAddress( memAddress, dez ) {
     console.log( 'memAddress:', memAddress );
     fs.writeFileSync( FILE_TO_WATCH, `memAddress: ${memAddress}` );

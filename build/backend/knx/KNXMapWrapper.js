@@ -14,6 +14,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+  * Diese Klasse ermöglicht es mit KnxMap zu komunizieren obwohl es ein Python
+  * Programm ist. Dies kann dadurch ermöglicht werden weil das Programm als Konsolen
+  * Programm aufgeruffen werden kann. Diese Kalassr Interpretiert die ergebnisse und gibt sie aus.
+  * @param ipAddress die IP des KNX-Routers
+  * @param der speicherord auf der Festplatte von KnxMap
+**/
 var KNXMapWrapper = function () {
   function KNXMapWrapper(ipAddress) {
     var knxmapPath = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'knxmap';
@@ -23,6 +30,13 @@ var KNXMapWrapper = function () {
     this.ip = ipAddress;
     this.knxmap = knxmapPath;
   }
+
+  /**
+    * Scant den Bus auf KNX-Busteilnehmer
+    * @param pa physikalische Adresse die gescannt werden sollen.
+    * @return die gefundenen Pas
+  **/
+
 
   _createClass(KNXMapWrapper, [{
     key: 'scanKNXBus',
@@ -38,6 +52,13 @@ var KNXMapWrapper = function () {
         });
       });
     }
+
+    /**
+      * Liest die Mask aus einem Busteilnehmer aus.
+      * @param pa die pa von der die Mask ausgelesen werden soll.
+      * @return die Mask der pa
+    **/
+
   }, {
     key: 'devDescriptorRead',
     value: function devDescriptorRead(pa) {
@@ -50,6 +71,15 @@ var KNXMapWrapper = function () {
         });
       });
     }
+
+    /**
+      * Liest einen bestimten Memory Teil aus einem Busteilnehmer aus.
+      * @param pa der Busteilnehmer der ausgelesen werden soll
+      * @param memoryAddress der startpunkt von dem aus dem Memory ausgelesen werden soll
+      * @param readCount wie viel Adressen sollen ausgelesen werden
+      * @return gibt die speicheradresse inhalt als hex aus
+    **/
+
   }, {
     key: 'memoryRead',
     value: function memoryRead(pa, memoryAddress) {
@@ -64,6 +94,17 @@ var KNXMapWrapper = function () {
         });
       });
     }
+
+    /**
+      * Mit dieser Methode können die Eigenschaften eines KNX-Busteilnehmers ausgelesen werden
+      * @param pa der Busteilnehmer der ausgelesen werden soll
+      * @param pid property-id, bedeutet welche Eigenschaften soll ausgelesen werden
+      * @param oid object-index welcher Teil der Eigenschaften soll ausgelesen werden
+      * @param sid start-index startpunkt von dem aus dem Memory ausgelesen werden soll
+      * @param elements wie viel speicheradressen sollen ausgelesen werden
+      * @return gibt den ausgelesenden Wert zurück in hex
+    **/
+
   }, {
     key: 'propertyValueRead',
     value: function propertyValueRead(pa, pid) {

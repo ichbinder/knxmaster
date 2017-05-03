@@ -1,9 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+// axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+axios.defaults.baseURL = 'http://localhost:8020/';
 
-
+/**
+  * dies ist eine Test webseite um die Jalousien von Raum 001 im Gebäude zu steuern.
+**/
 export class ReMainCarsten extends React.Component {
   constructor( props ) {
     super( props );

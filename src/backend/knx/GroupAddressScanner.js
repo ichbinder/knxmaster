@@ -3,8 +3,16 @@ import path from 'path';
 import gac from './GroupAddressConverter';
 import num from './NumberConverter';
 
+/**
+  * Das auslesen der einzelenen GA der Busteilnehmer wird in der Master arbeit genuaer
+  * erleutert. (Kapitel 4.6.3.1)
+**/
+
+// dies ist die Log-Datei. Alles was in dieser Log-Datei geschrieben wird wird ans
+// Scan PA Frontend gesendet.
 const FILE_TO_WATCH = path.resolve( __dirname, '../log/knxscan.log' );
 
+// die KNX-Busteilnehmer Mask's die gescannt werden können auf GA.
 const gaStartAddress = {
   '0010': 1,
   '0011': 1,
@@ -21,12 +29,21 @@ const gaStartAddress = {
   '0701': 5
 };
 
+/**
+  * Diese Klasse Scannt den KAX-Busteilnehmer auf GA
+  * @param kNXMapWrapper ist die verbindung über KnxMap zum KNX-Busteilnehmer
+  * @param deviceDB die JSON-Datenbanken in die die Ergebnisse gespeichert werdne soll.
+**/
 export default class GoupAddressScaner {
   constructor( kNXMapWrapper, deviceDB ) {
     this.kNXMapWrapper = kNXMapWrapper;
     this.db = deviceDB;
   }
 
+/**
+  * Diese Methode Iteriert über alle gefunden PA und öffnet die Jeweileige Methode
+  * um die GA aus den Jeweileige Speicherblöcken der Busteilnehmer zu hollen.
+**/
   scanGroupAddress() {
     return new Promise( ( resolve ) => {
       let logText = `
@@ -86,6 +103,9 @@ export default class GoupAddressScaner {
     } );
   }
 
+  /**
+    * Realisation Type 1 bis 5 werdne auf GA gescant
+  **/
   _realisationType1Until5( _this, devPa ) {
     return _this.kNXMapWrapper.memoryRead( devPa, '0x0116', 1 )
         .then( countGa => {
@@ -108,6 +128,9 @@ export default class GoupAddressScaner {
         } );
   }
 
+  /**
+    * Realisation Type 3 GrATEasy 2 werdne auf GA gescant
+  **/
   _realisationType3GrATEasy2( _this, devPa ) {
     let gaMemoryAddressTmp = '';
     return _this.kNXMapWrapper.propertyValueRead( devPa, 7, 1 )
@@ -139,6 +162,9 @@ export default class GoupAddressScaner {
       } );
   }
 
+  /**
+    * Realisation Type 7 werdne auf GA gescant
+  **/
   _realisationType7( _this, devPa ) {
     return new Promise( ( resolve, reject ) => {
       let gaMemoryAddressTmp = '';
@@ -173,6 +199,12 @@ export default class GoupAddressScaner {
     } );
   }
 
+  /**
+    * Hier werden die GA aus dem Speicher der jeweiligen KNX-Busteilnehmer gelesen,
+    * da offt nur 12 HEX Strings auf einmal aus einem KNX-Busteilnehmer gelesen werden
+    * können, muss die zu lesende Megen aufgeteilt werden und geschaut werden ob
+    * sie grösser ist als 12.
+  **/
   _readGaFromMemory( _this, memAddress, addressCount, devPa ) {
     return new Promise( ( resolve ) => {
       let gaResolve = '';
@@ -209,6 +241,10 @@ export default class GoupAddressScaner {
     } );
   }
 
+  /**
+    * Die gelesenen GA des jeweileigen KNX-Busteilnehmers werden in die Scann JSON-Datenbanken
+    * gespeichert.
+  **/
   _saveGa( _this, memoryGaDump, devPa ) {
     console.log( 'memoryGaDump to length:', memoryGaDump.length / 4 );
     const countGa = memoryGaDump.length / 4;
@@ -225,6 +261,9 @@ export default class GoupAddressScaner {
     fs.writeFileSync( FILE_TO_WATCH, `Die GA wurde gespeicher: ${gaArray}` );
   }
 
+  /**
+    * Adiert zu einem Memory Adresse eine wert um zu einer anderen Memory adresse zu kommen.
+  **/
   _addMemoryAddress( memAddress, dez ) {
     console.log( 'memAddress:', memAddress );
     fs.writeFileSync( FILE_TO_WATCH, `memAddress: ${memAddress}` );

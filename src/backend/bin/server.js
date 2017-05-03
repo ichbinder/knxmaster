@@ -5,12 +5,20 @@ import path from 'path';
 import eWs from 'express-ws';
 import rKnxAPI from '../routes/rKnxapi';
 import rFrontend from '../routes/rFrontend';
-import rWebSocket from '../routes/rWebSocket';
+
+/**
+  * Dies ist der Express-Server. Hiermit wird eine Rest-HTTP-API aufgebaut.
+  * Die wichtigsten Einträge hier sind die Routen.
+  * Die Route rKnxapi beinhaltet alles wichtige das die KNX API umsetzt.
+  * Die rFrontend läde das Frontend also alles was mit React zu tun hat.
+  **/
+
 
 const expressWs = eWs( express() );
 const app = expressWs.app;
-// const app = express();
 
+// Lade Statik Datei
+app.use( express.static( path.resolve( __dirname, '../static' ) ) );
 app.set( 'port', process.env.PORT || 8020 );
 
 // laden den bodyParser
@@ -27,13 +35,17 @@ app.use( express.static( `${path.resolve( __dirname, '../../frontend' )}` ) );
 // Meine eigenen Routes werden hier bekoant gemacht
 app.use( '/api', rKnxAPI() );
 app.use( '/web', rFrontend );
-app.use( '/socket', rWebSocket() );
 
+// Lade JSON-Server
 app.use( jsonServer.defaults() );
 app.use( jsonServer.rewriter( {
-  '/:bId/:rId': '/funktion?buildingId=:bId&roomId=:rId'
+  '/funktion/:search': '/ga?funktion=:search',
+  '/suche/:search': '/ga?q=:search',
+  '/dpt/:search': '/ga?DPT=:search',
+  '/:bId/:rId': '/ga?gebaeude=:bId&raum=:rId',
+  '/:bId': '/ga?gebaeude=:bId'
 } ) );
-app.use( jsonServer.router( './apiDB.json' ) );
+app.use( jsonServer.router( path.resolve( __dirname, '../db/apiDB.json' ) ) );
 
 // Error Handling
 app.use( ( req, res ) => {

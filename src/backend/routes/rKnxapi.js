@@ -6,22 +6,42 @@ import KNXConnector from '../knx/KNXConnector';
 import KnxMap from '../knx/KNXMapWrapper';
 import KNXScan from '../knx/KNXScan';
 
+// dies ist die Log-Datei. Alles was in dieser Log-Datei geschrieben wird wird ans
+// Scan PA Frontend gesendet.
 const FILE_TO_WATCH = path.resolve( __dirname, '../log/knxscan.log' );
 
+// Hier muss die IP des KNX-Routers eingetragen werden.
 const IP = '141.45.187.88';
 // const IP = '192.168.3.110';
-const dbKnxBus = low( './knxbusDB.json' );
-// const dbApi = low( './knxapiDB.json' );
 
+// der Path zu den JSON-Datenbanken
+const dbKnxBus = low( path.resolve( __dirname, '../db/knxbusDB.json' ) );
+const apiDB = low( path.resolve( __dirname, '../db/apiDB.json' ) );
+
+// Folgende DPT sind erlaubt
 const dptTable = { DPT1: 0, DPT3: 3, DPT5: 7 };
 
-dbKnxBus.defaults( { pas: [], building: [] } )
+// Inizialiesierung der JSON-Datenbanken
+dbKnxBus.defaults( { pas: [] } )
+  .write();
+
+apiDB.defaults( { ga: [] } )
   .write();
 
 export default function create( ) {
   const router = new express.Router();
+
+
   KNXConnector.create( IP )
     .then( ( connection ) => {
+      /**
+        * Mit dieser Route ist es möglich direckt mit dem KNX-Bus zu komunizieren.
+        * connection.write - Etwas auf den KNX Bus senden
+        * connection.on - auf dem KNX bus horchen ob etwas kommt als
+        * GroupValue_Response nur zum testen.
+        * connection.read - versucht eine Response ab zufangen, das klappt aber
+        * er nur bei alten geräten
+      **/
       router.post( '/writeDpt', ( req, res ) => {
         console.log( req.body.ga, req.body.value, req.body.dpt );
         connection.write( req.body.ga, req.body.value, req.body.dpt );
@@ -44,6 +64,9 @@ export default function create( ) {
         } );
       } );
 
+      /**
+        * Dies ist der BusMonitor. Die daten werden per Websoket an die webseitet geschickt.
+      **/
       router.ws( '/busMonitor', ( ws, req ) => {
         connection.on( 'event', ( evt, src, dest, value ) => {
           const hexValue = new Buffer( value, 'hex' ).toString( 'hex' );
@@ -60,6 +83,9 @@ export default function create( ) {
     } )
     .catch( err => console.log( 'Error:', err ) );
 
+  /**
+    * Bei dieser Funktion wird die LogFile per Websoket an die webseite geschickt.
+  **/
   router.ws( '/getScanResoult', ( ws, req ) => {
     console.log( 'New connection has opened!' );
     fs.watch( FILE_TO_WATCH, ( eventType, filename ) => {
@@ -78,9 +104,15 @@ export default function create( ) {
       console.log( 'yes1!' );
       ws.send( msg );
     } );
-    console.log( 'socket', req );
+    console.log( 'socket', req.testing );
   } );
 
+  /**
+    * Hier wird der Scan Proces gestartet.
+    * Erst wird  der Bus  mit knxScan.scan auf: GA, GO und DPT gescannt.
+    * Als nächstes werden die gesamelten Daten verarbeitet in knxScan.generateGOInDB.
+    * Dann wird die JSON-Datenbanken gereinigt von allten Daten in  knxScan.clearDB.
+  **/
   router.post( '/scanKnx', ( req, res ) => {
     if ( ! req.body.phyAddress )
       res.send( 'error: pleas tip phyAddress.' );
@@ -95,6 +127,14 @@ export default function create( ) {
     }
   } );
 
+  /**
+    * Es gibt zwei JSON-Datenbanken.
+    * Eine für die gescannten Daten und eine für die eingeben der Benutzer.
+    * In dieser Funktion werden beide JSON-Datenbanken zusammen gebracht und dann an den
+    * Benutzer (Webseite) geschickt.
+    * Dabei wird so vorgegangen. Erst wird geguckt ob es Daten zu einer bestimmten GR gibt
+    * in der Benuter Datenbake und wenn nicht werden die unfolstendingen aus der Scan DB genommen.
+  **/
   router.get( '/getAllGaOfDPT', ( req, res ) => {
     const arrayGA = [];
     const result = dbKnxBus.get( 'pas' )
@@ -111,7 +151,7 @@ export default function create( ) {
         }
       }
     }
-    const building = dbKnxBus.get( 'building' )
+    const building = apiDB.get( 'ga' )
       .filter( Boolean )
       .value();
 
@@ -150,6 +190,12 @@ export default function create( ) {
     res.send( { building: buildingTmp } );
   } );
 
+  /**
+    * Hier werden die zusatz Daten in die Benutzer Datenbake gespeichert.
+    * Gebaeude, Raum, Funktion, Kommentar, ga, DPT, werden gespeichert.
+    * Dabie wird daruf geachtet ob es schon einen Beitrag gibt für die GA oder nicht.
+    * Update oder Neu erstellen.
+  **/
   router.post( '/saveGa', ( req, res ) => {
     const errorDB = { error: '' };
     if ( !req.body.ga )
@@ -166,8 +212,8 @@ export default function create( ) {
       req.body.kommentar = '';
 
     if ( errorDB.error === '' ) {
-      if ( !dbKnxBus.get( 'building' ).find( { ga: req.body.ga } ).value() ) {
-        dbKnxBus.get( 'building' )
+      if ( !apiDB.get( 'ga' ).find( { ga: req.body.ga } ).value() ) {
+        apiDB.get( 'ga' )
           .push( {
             ga: req.body.ga,
             DPT: req.body.DPT,
@@ -178,7 +224,7 @@ export default function create( ) {
           } )
           .write();
       } else {
-        dbKnxBus.get( 'building' )
+        apiDB.get( 'ga' )
           .find( { ga: req.body.ga } )
           .assign( {
             DPT: req.body.DPT,
@@ -193,52 +239,6 @@ export default function create( ) {
       res.json( { msg: 'save ok!' } );
     } else
       res.json( errorDB );
-  } );
-
-  router.get( '/getApiDb', ( req, res ) => {
-    const gebaeudeAll = dbKnxBus.get( 'building' )
-      .map( 'gebaeude' )
-      .uniqWith()
-      .value();
-    const raumAll = dbKnxBus.get( 'building' )
-      .map( 'raum' )
-      .uniqWith()
-      .value();
-    const funktionAll = dbKnxBus.get( 'building' )
-      .map( 'funktion' )
-      .uniqWith()
-      .value();
-    const all = dbKnxBus.get( 'building' ).value();
-    const apiDB = { };
-    for ( let g = 0; g < gebaeudeAll.length; g++ ) {
-      for ( let r = 0; r < raumAll.length; r++ ) {
-        for ( let f = 0; f < funktionAll.length; f++ ) {
-          for ( let i = 0; i < all.length; i++ ) {
-            if ( all[i].gebaeude === gebaeudeAll[g] &&
-                all[i].raum === raumAll[r] &&
-                all[i].funktion === funktionAll[f] ) {
-              const funktionTmp = {};
-              funktionTmp[funktionAll[f]] = {
-                ga: all[i].ga,
-                DPT: all[i].DPT,
-                kommentar: all[i].kommentar
-              };
-              const raumTmp = {};
-              raumTmp[raumAll[r]] = funktionTmp;
-              apiDB[gebaeudeAll[g]] = raumTmp;
-              // console.log( apiDB[gebaeudeAll[g][raumAll[r]]] );
-              // apiDB.gebaeude[gebaeudeAll[g]] = { raum: raumAll[r] };
-              // apiDB.gebaeudeAll[g].raumAll[r].funktionAll[f] = {
-              //   ga: all[i].ga,
-              //   DPT: all[i].DPT,
-              //   kommentar: all[i].kommentar
-              // };
-            }
-          }
-        }
-      }
-    }
-    res.json( JSON.parse( apiDB ) );
   } );
 
   return router;

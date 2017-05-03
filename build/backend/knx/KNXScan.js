@@ -34,7 +34,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+// dies ist die Log-Datei. Alles was in dieser Log-Datei geschrieben wird wird ans
+// Scan PA Frontend gesendet.
 var FILE_TO_WATCH = _path2.default.resolve(__dirname, '../log/knxscan.log');
+
+/**
+  * Diese Klasse Ist für das Scannen und die Zusamfügungn der gewonnenen Daten
+  * in einer JSON-Datenbak verantwortlich. Hier vereinen sich die ganzen Klassen
+  * um den KNX-Bus zu Scannen.
+  @param kNXMapWrapper das verbindungs Objekt zum KNX-Bus
+  @param deviceDB die JSON-Datenbak
+  @param dbName Datenbank-Name in der JSON
+**/
 
 var KNXScan = function () {
   function KNXScan(kNXMapWrapper, deviceDB, dbName) {
@@ -44,6 +55,17 @@ var KNXScan = function () {
     this.db = deviceDB;
     this.dbName = dbName;
   }
+
+  /**
+    * Hier wird der Scan Proces gestartet.
+    * Erst wird  der Bus  mit PAScanner auf PA's gescannt
+    * GaScanner Scannt nach GA
+    * GOAScanner Scannt nach GOA
+    * GOScanner Scannt nach GA
+    * @param physicalAddresse die KNX-Busteilnehmers die gescannt werden solen
+    * @return true wenn es geklapt hat
+  **/
+
 
   _createClass(KNXScan, [{
     key: 'scan',
@@ -65,6 +87,11 @@ var KNXScan = function () {
         });
       });
     }
+
+    /**
+      * Die gescannten GA, GO, GOA und DPT werden verknüpft und gepeichert
+    **/
+
   }, {
     key: 'generateGOInDB',
     value: function generateGOInDB() {
@@ -101,6 +128,12 @@ var KNXScan = function () {
         resolve(true);
       });
     }
+
+    /**
+      * hiermit kann die Datenbank aufgereumt werden. Nach dem Scannen und dem Verküpfen
+      * beiben unüze reste in der Datenbank die gläscht werden können.
+    **/
+
   }, {
     key: 'clearDB',
     value: function clearDB() {

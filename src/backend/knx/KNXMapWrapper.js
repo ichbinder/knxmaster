@@ -1,11 +1,23 @@
 import cmd from 'node-cmd';
 
+/**
+  * Diese Klasse ermöglicht es mit KnxMap zu komunizieren obwohl es ein Python
+  * Programm ist. Dies kann dadurch ermöglicht werden weil das Programm als Konsolen
+  * Programm aufgeruffen werden kann. Diese Kalassr Interpretiert die ergebnisse und gibt sie aus.
+  * @param ipAddress die IP des KNX-Routers
+  * @param der speicherord auf der Festplatte von KnxMap
+**/
 export default class KNXMapWrapper {
   constructor( ipAddress, knxmapPath = 'knxmap' ) {
     this.ip = ipAddress;
     this.knxmap = knxmapPath;
   }
 
+  /**
+    * Scant den Bus auf KNX-Busteilnehmer
+    * @param pa physikalische Adresse die gescannt werden sollen.
+    * @return die gefundenen Pas
+  **/
   scanKNXBus( pa ) {
     return new Promise( ( resolve, reject ) => {
       console.log( `${this.knxmap} scan ${this.ip} ${pa}` );
@@ -20,6 +32,11 @@ export default class KNXMapWrapper {
     } );
   }
 
+  /**
+    * Liest die Mask aus einem Busteilnehmer aus.
+    * @param pa die pa von der die Mask ausgelesen werden soll.
+    * @return die Mask der pa
+  **/
   devDescriptorRead( pa ) {
     return new Promise( ( resolve, reject ) => {
       cmd.get( `${this.knxmap} apci ${this.ip} ${pa} DeviceDescriptor_Read`,
@@ -33,6 +50,13 @@ export default class KNXMapWrapper {
     } );
   }
 
+  /**
+    * Liest einen bestimten Memory Teil aus einem Busteilnehmer aus.
+    * @param pa der Busteilnehmer der ausgelesen werden soll
+    * @param memoryAddress der startpunkt von dem aus dem Memory ausgelesen werden soll
+    * @param readCount wie viel Adressen sollen ausgelesen werden
+    * @return gibt die speicheradresse inhalt als hex aus
+  **/
   memoryRead( pa, memoryAddress, readCount = 1 ) {
     return new Promise( ( resolve, reject ) => {
       cmd.get(
@@ -49,6 +73,15 @@ export default class KNXMapWrapper {
     } );
   }
 
+  /**
+    * Mit dieser Methode können die Eigenschaften eines KNX-Busteilnehmers ausgelesen werden
+    * @param pa der Busteilnehmer der ausgelesen werden soll
+    * @param pid property-id, bedeutet welche Eigenschaften soll ausgelesen werden
+    * @param oid object-index welcher Teil der Eigenschaften soll ausgelesen werden
+    * @param sid start-index startpunkt von dem aus dem Memory ausgelesen werden soll
+    * @param elements wie viel speicheradressen sollen ausgelesen werden
+    * @return gibt den ausgelesenden Wert zurück in hex
+  **/
   propertyValueRead( pa, pid, oid = 0, sid = 1, elements = 1 ) {
     return new Promise( ( resolve, reject ) => {
       cmd.get(

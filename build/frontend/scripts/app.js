@@ -21817,7 +21817,12 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	_axios2.default.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+	// axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+	_axios2.default.defaults.baseURL = 'http://localhost:8020/';
+	
+	/**
+	  * dies ist eine Test webseite um die Jalousien von Raum 001 im Gebäude zu steuern.
+	**/
 	
 	var ReMainCarsten = exports.ReMainCarsten = function (_React$Component) {
 	  _inherits(ReMainCarsten, _React$Component);
@@ -25451,10 +25456,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _axios = __webpack_require__(183);
-	
-	var _axios2 = _interopRequireDefault(_axios);
-	
 	var _reGroupAddrEditor = __webpack_require__(213);
 	
 	var _reScanKnx = __webpack_require__(367);
@@ -25471,8 +25472,9 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	_axios2.default.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
-	
+	/**
+	  * Hier fängt alles an. Das haubt Modul von der Webseite von hier aus wird alles geladen.
+	**/
 	var ReMain = exports.ReMain = function (_React$Component) {
 	  _inherits(ReMain, _React$Component);
 	
@@ -25632,7 +25634,14 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var SERVER_URL = 'http://playground.cm.htw-berlin.de:8020';
+	// die URL zur Backend RestAPI um mit /api/getAllGaOfDPT die GA abzurufen
+	// const SERVER_URL = 'http://playground.cm.htw-berlin.de:8020';
+	var SERVER_URL = 'http://localhost:8020';
+	
+	/**
+	  * Die Webseite die das Analysieren von GA und DPT bereitstellt
+	  * Folgende DPT sind erlaubt DPT1, DPT3, DPT5
+	**/
 	
 	var GroupAddr = exports.GroupAddr = function (_React$Component) {
 	  _inherits(GroupAddr, _React$Component);
@@ -25768,6 +25777,12 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	/**
+	  * Dies ist eine Unter Modul von der Webseite reGroupAdrEditoe
+	  * hierlassen sich alle GA die einen DPT1 haben bearbeiten.
+	  * Folgende Einstellungen sind möglich:
+	  * Gebäude, Raum, Funktion, Kommentar
+	**/
 	var GroupAddr = function (_React$Component) {
 	  _inherits(GroupAddr, _React$Component);
 	
@@ -26028,6 +26043,12 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	/**
+	  * Dies ist eine Unter Modul von der Webseite reGroupAdrEditoe
+	  * hierlassen sich alle GA die einen DPT3.007 haben bearbeiten.
+	  * Folgende Einstellungen sind möglich:
+	  * Gebäude, Raum, Funktion, Kommentar
+	**/
 	var GroupAddr = function (_React$Component) {
 	  _inherits(GroupAddr, _React$Component);
 	
@@ -34995,6 +35016,12 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	/**
+	  * Dies ist eine Unter Modul von der Webseite reGroupAdrEditoe
+	  * hierlassen sich alle GA die einen DPT5.004 haben bearbeiten.
+	  * Folgende Einstellungen sind möglich:
+	  * Gebäude, Raum, Funktion, Kommentar
+	**/
 	var GroupAddr = function (_React$Component) {
 	  _inherits(GroupAddr, _React$Component);
 	
@@ -35264,7 +35291,13 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	_axios2.default.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+	// die URL zur Backend RestAPI um mit /api/getAllGaOfDPT die GA abzurufen
+	// axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+	_axios2.default.defaults.baseURL = 'http://localhost:8020/';
+	
+	/**
+	  * Dies ist die Webseite die es ermöglicht den KNX-Bus auf Busteilnehmer zu Scannen
+	**/
 	
 	var ScanKnx = exports.ScanKnx = function (_React$Component) {
 	  _inherits(ScanKnx, _React$Component);
@@ -35375,7 +35408,16 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var exampleSocket = new WebSocket('ws://playground.cm.htw-berlin.de:8020/api/getScanResoult');
+	// öffnet ein Websocket zum Backend um so die erscanten ergebnisse von PA
+	// in die Webseite zu hollen
+	// const exampleSocket = new WebSocket( 'ws://playground.cm.htw-berlin.de:8020/api/getScanResoult' );
+	var exampleSocket = new WebSocket('ws://localhost:8020/api/getScanResoult');
+	
+	/**
+	  * Dies ist eine Module das in die Webseite reScanKnx geldaen wird.
+	  * Es dient dazu ein textarea zu einem LOG-Fenser zu machen auf dem die ergebnisse
+	  * des Scannes vom KNX-Bus ausgegeben wird. (Scannen von PA's)
+	**/
 	
 	var Logger = function (_React$Component) {
 	  _inherits(Logger, _React$Component);
@@ -35478,7 +35520,14 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var socket = new WebSocket('ws://playground.cm.htw-berlin.de:8020/api/busMonitor');
+	// die URL zum WebSocket. Er dient zum stream für den BusMonitor.
+	// const socket = new WebSocket( 'ws://playground.cm.htw-berlin.de:8020/api/busMonitor' );
+	var socket = new WebSocket('ws://localhost:8020/api/busMonitor');
+	
+	/**
+	  * Dies bildet die Webseite Bus-Monitor dort kann man den angeschlossenden
+	  * KNXBus beomachten, also die Telegramme die gesendet werden.
+	**/
 	
 	var BusMonitor = function (_React$Component) {
 	  _inherits(BusMonitor, _React$Component);

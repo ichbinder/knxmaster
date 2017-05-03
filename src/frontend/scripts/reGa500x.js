@@ -2,6 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import Slider from 'rc-slider';
 
+/**
+  * Dies ist eine Unter Modul von der Webseite reGroupAdrEditoe
+  * hierlassen sich alle GA die einen DPT5.004 haben bearbeiten.
+  * Folgende Einstellungen sind möglich:
+  * Gebäude, Raum, Funktion, Kommentar
+**/
 export default class GroupAddr extends React.Component {
   static get propTypes() {
     return {

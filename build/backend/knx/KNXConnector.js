@@ -14,6 +14,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+  * Diese Klasse stelt eine Verbindung zum KNX-Router her, um narichten auf den
+  * Bus zu versenden und um den Bus zu monitoren.
+  * @param ipAddr hier muss die IP zum KNX-Router angegeben werden
+  * @param ipPort der Port für den KNX-Router
+  * @param die PA die diese Connection haben soll im KNX-Bus
+  * @param minimumDelay die verzögerung zwischen dem senden von Telegrammen
+**/
 var KNXConnector = function () {
   function KNXConnector(ipAddr) {
     var ipPort = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3671;
@@ -28,8 +36,22 @@ var KNXConnector = function () {
     this.minimumDelay = minimumDelay;
   }
 
+  /**
+  * erstellt ein Objekt dieser Klasse
+  * @param ipAddr hier muss die IP zum KNX-Router angegeben werden
+  * @param ipPort der Port für den KNX-Router
+  * @param die PA die diese Connection haben soll im KNX-Bus
+  * @param minimumDelay die verzögerung zwischen dem senden von Telegrammen
+  **/
+
+
   _createClass(KNXConnector, [{
     key: 'connect',
+
+
+    /**
+      * Metode zum aufbau der verbindung
+    **/
     value: function connect() {
       var _this = this;
 
@@ -57,6 +79,11 @@ var KNXConnector = function () {
         });
       });
     }
+
+    /**
+     * Sendet eine Gruppenadresse mit dem DPT 1 auf den Bus.
+    **/
+
   }, {
     key: 'dpt1Write',
     value: function dpt1Write(groupAddr, value) {

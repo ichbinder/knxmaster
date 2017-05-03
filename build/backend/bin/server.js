@@ -28,16 +28,20 @@ var _rFrontend = require('../routes/rFrontend');
 
 var _rFrontend2 = _interopRequireDefault(_rFrontend);
 
-var _rWebSocket = require('../routes/rWebSocket');
-
-var _rWebSocket2 = _interopRequireDefault(_rWebSocket);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+  * Dies ist der Express-Server. Hiermit wird eine Rest-HTTP-API aufgebaut.
+  * Die wichtigsten Einträge hier sind die Routen.
+  * Die Route rKnxapi beinhaltet alles wichtige das die KNX API umsetzt.
+  * Die rFrontend läde das Frontend also alles was mit React zu tun hat.
+  **/
 
 var expressWs = (0, _expressWs2.default)((0, _express2.default)());
 var app = expressWs.app;
-// const app = express();
 
+// Lade Statik Datei
+app.use(_express2.default.static(_path2.default.resolve(__dirname, '../static')));
 app.set('port', process.env.PORT || 8020);
 
 // laden den bodyParser
@@ -54,13 +58,17 @@ app.use(_express2.default.static('' + _path2.default.resolve(__dirname, '../../f
 // Meine eigenen Routes werden hier bekoant gemacht
 app.use('/api', (0, _rKnxapi2.default)());
 app.use('/web', _rFrontend2.default);
-app.use('/socket', (0, _rWebSocket2.default)());
 
+// Lade JSON-Server
 app.use(_jsonServer2.default.defaults());
 app.use(_jsonServer2.default.rewriter({
-  '/:bId/:rId': '/funktion?buildingId=:bId&roomId=:rId'
+  '/funktion/:search': '/ga?funktion=:search',
+  '/suche/:search': '/ga?q=:search',
+  '/dpt/:search': '/ga?DPT=:search',
+  '/:bId/:rId': '/ga?gebaeude=:bId&raum=:rId',
+  '/:bId': '/ga?gebaeude=:bId'
 }));
-app.use(_jsonServer2.default.router('./apiDB.json'));
+app.use(_jsonServer2.default.router(_path2.default.resolve(__dirname, '../db/apiDB.json')));
 
 // Error Handling
 app.use(function (req, res) {

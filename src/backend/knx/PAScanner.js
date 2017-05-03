@@ -1,5 +1,11 @@
 import sleep from 'sleep';
 
+
+/**
+  * Die Klasse Scannt den Bus auf Busteilnehmer
+  * @param kNXMapWrapper das verbindungs Objekt zum KNX-Bus
+  * @param deviceDB die JSON-Datenbak
+**/
 export default class PAScanner {
   constructor( kNXMapWrapper, db ) {
     this.kNXMapWrapper = kNXMapWrapper;
@@ -8,6 +14,11 @@ export default class PAScanner {
     this.apa = null;
   }
 
+  /**
+    * Die Methonde Scannt den Bus auf Busteilnehmer und wenn sie Welche gefunden hat
+    * speichert sie sie in die Dankenbank.
+    * @param physicalAddresse die Pa's die gescannt werden sollen
+  **/
   scanKNXBus( physicalAddresse ) {
     const _this = this;
     this.pa = physicalAddresse;

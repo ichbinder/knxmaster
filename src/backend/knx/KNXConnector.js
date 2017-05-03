@@ -1,5 +1,13 @@
 import knx from 'knx';
 
+/**
+  * Diese Klasse stelt eine Verbindung zum KNX-Router her, um narichten auf den
+  * Bus zu versenden und um den Bus zu monitoren.
+  * @param ipAddr hier muss die IP zum KNX-Router angegeben werden
+  * @param ipPort der Port für den KNX-Router
+  * @param die PA die diese Connection haben soll im KNX-Bus
+  * @param minimumDelay die verzögerung zwischen dem senden von Telegrammen
+**/
 export default class KNXConnector {
   constructor( ipAddr, ipPort = 3671, pa = '1.1.250', minimumDelay = 10 ) {
     this.ipAddr = ipAddr;
@@ -8,11 +16,21 @@ export default class KNXConnector {
     this.minimumDelay = minimumDelay;
   }
 
+  /**
+  * erstellt ein Objekt dieser Klasse
+  * @param ipAddr hier muss die IP zum KNX-Router angegeben werden
+  * @param ipPort der Port für den KNX-Router
+  * @param die PA die diese Connection haben soll im KNX-Bus
+  * @param minimumDelay die verzögerung zwischen dem senden von Telegrammen
+  **/
   static create( ipAddr, ipPort = 3671, pa = '1.1.250', minimumDelay = 10 ) {
     const kNXConnector = new KNXConnector( ipAddr, ipPort, pa, minimumDelay );
     return kNXConnector.connect();
   }
 
+  /**
+    * Metode zum aufbau der verbindung
+  **/
   connect() {
     return new Promise( ( resolve, reject ) => {
       const connection = new knx.Connection( {
@@ -38,6 +56,9 @@ export default class KNXConnector {
     } );
   }
 
+ /**
+  * Sendet eine Gruppenadresse mit dem DPT 1 auf den Bus.
+**/
   dpt1Write( groupAddr, value ) {
     return new Promise( ( resolve ) => {
       const binaryStatus = new knx.Datapoint(

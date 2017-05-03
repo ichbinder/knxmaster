@@ -22,8 +22,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+  * Das auslesen der einzelenen GOA der Busteilnehmer wird in der Master arbeit genuaer
+  * erleutert. (Kapitel 4.6.3.3)
+**/
+
+// dies ist die Log-Datei. Alles was in dieser Log-Datei geschrieben wird wird ans
+// Scan PA Frontend gesendet.
 var FILE_TO_WATCH = _path2.default.resolve(__dirname, '../log/knxscan.log');
 
+// die KNX-Busteilnehmer Mask's die gescannt werden können auf GOAT.
 var gaMask = {
   '0010': 1,
   '0011': 1,
@@ -41,6 +49,14 @@ var gaMask = {
   5705: 6
 };
 
+/**
+  * Diese Klasse Scannt den KAX-Busteilnehmer auf
+  * Gruppen Objekt Association Tabels und wertet diese aus ums sie in die JSON-Datenbanken
+  * zu Speicher.
+  * @param kNXMapWrapper ist die verbindung über KnxMap zum KNX-Busteilnehmer
+  * @param deviceDB die JSON-Datenbanken in die die Ergebnisse gespeichert werdne soll.
+**/
+
 var GroupObjectAssociationScanner = function () {
   function GroupObjectAssociationScanner(kNXMapWrapper, deviceDB) {
     _classCallCheck(this, GroupObjectAssociationScanner);
@@ -48,6 +64,12 @@ var GroupObjectAssociationScanner = function () {
     this.kNXMapWrapper = kNXMapWrapper;
     this.db = deviceDB;
   }
+
+  /**
+    * Diese Methode Iteriert über alle gefunden PA und öffnet die Jeweileige Methode
+    * um die GOAT aus den Jeweileige Speicherblöcken der Busteilnehmer zu hollen.
+  **/
+
 
   _createClass(GroupObjectAssociationScanner, [{
     key: 'scanGrOAT',
@@ -106,6 +128,11 @@ var GroupObjectAssociationScanner = function () {
         }
       });
     }
+
+    /**
+      * Realisation Type 1 werdne auf GOA gescant
+    **/
+
   }, {
     key: '_realisationType1',
     value: function _realisationType1(_this, devPa) {
@@ -165,6 +192,11 @@ var GroupObjectAssociationScanner = function () {
         });
       });
     }
+
+    /**
+      * Realisation Type 3 GrOATEasy 3 werdne auf GOA gescant
+    **/
+
   }, {
     key: '_realisationType3GrOATEasy3',
     value: function _realisationType3GrOATEasy3(_this, devPa) {
@@ -191,6 +223,14 @@ var GroupObjectAssociationScanner = function () {
         });
       });
     }
+
+    /**
+      * Hier werden die GOAT aus dem Speicher der jeweiligen KNX-Busteilnehmer gelesen,
+      * da offt nur 12 HEX Strings auf einmal aus einem KNX-Busteilnehmer gelesen werden
+      * können, muss die zu lesende Megen aufgeteilt werden und geschaut werden ob
+      * sie grösser ist als 12.
+    **/
+
   }, {
     key: '_readGoatFromMemory',
     value: function _readGoatFromMemory(_this, memAddress, addressCount, devPa) {
@@ -223,6 +263,12 @@ var GroupObjectAssociationScanner = function () {
         });
       });
     }
+
+    /**
+      * Die gelesenen GA des jeweileigen KNX-Busteilnehmers werden in die Scann JSON-Datenbanken
+      * gespeichert.
+    **/
+
   }, {
     key: '_saveGoat',
     value: function _saveGoat(_this, memoryGoatDump, devPa, splitter) {
@@ -239,6 +285,11 @@ var GroupObjectAssociationScanner = function () {
       _this.db.get('pas').find({ pa: devPa }).assign({ groat: goatArray }).write();
       _fs2.default.writeFileSync(FILE_TO_WATCH, 'Die GOA wurde gespeicher: ' + goatArray);
     }
+
+    /**
+      * Adiert zu einem Memory Adresse eine wert um zu einer anderen Memory adresse zu kommen.
+    **/
+
   }, {
     key: '_addMemoryAddress',
     value: function _addMemoryAddress(memAddress, dez) {

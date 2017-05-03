@@ -8,9 +8,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = new _express2.default.Router();
 
-router.get('/', function (req, res) {
+router
+/**
+  * Rendern von dem Frontend
+**/
+.get('/', function (req, res) {
   res.render('pIndex');
-}).get('/apitsday', function (req, res) {
+})
+/**
+  * Rendern von dem Frontend
+**/
+.get('/apitsday', function (req, res) {
   res.render('pCarsten');
 });
 

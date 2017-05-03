@@ -14,6 +14,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+  * Die Klasse Scannt den Bus auf Busteilnehmer
+  * @param kNXMapWrapper das verbindungs Objekt zum KNX-Bus
+  * @param deviceDB die JSON-Datenbak
+**/
 var PAScanner = function () {
   function PAScanner(kNXMapWrapper, db) {
     _classCallCheck(this, PAScanner);
@@ -23,6 +28,13 @@ var PAScanner = function () {
     this.pa = null;
     this.apa = null;
   }
+
+  /**
+    * Die Methonde Scannt den Bus auf Busteilnehmer und wenn sie Welche gefunden hat
+    * speichert sie sie in die Dankenbank.
+    * @param physicalAddresse die Pa's die gescannt werden sollen
+  **/
+
 
   _createClass(PAScanner, [{
     key: 'scanKNXBus',
