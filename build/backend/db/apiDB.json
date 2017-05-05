@@ -7,6 +7,86 @@
       "raum": "112",
       "funktion": "Jalousie",
       "kommentar": "Sende 1 für hoch und 0 für herunter."
+    },
+    {
+      "ga": "2/1/25",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "113",
+      "funktion": "Jalousie-Links",
+      "kommentar": "Mit 1 Komplett herunter fahren,\nmit 0 Komplett herauf fahren."
+    },
+    {
+      "ga": "2/1/26",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "113",
+      "funktion": "Jalousie-Links",
+      "kommentar": "Tick nach unten 1,\nTick nach oben 0. Beide 0 und 1 Halten die Jalousie an. "
+    },
+    {
+      "ga": "2/1/27",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "113",
+      "funktion": "Jalousie-Rechts",
+      "kommentar": "Mit 1 Komplett herunter fahren,\nmit 0 Komplett herauf fahren."
+    },
+    {
+      "ga": "2/1/25",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "113",
+      "funktion": "Jalousie-Links",
+      "kommentar": "Mit 1 Komplett herunter fahren,\nmit 0 Komplett herauf fahren."
+    },
+    {
+      "ga": "2/1/26",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "113",
+      "funktion": "Jalousie-Links",
+      "kommentar": "Tick nach unten 1,\nTick nach oben 0. Beide 0 und 1 Halten die Jalousie an. "
+    },
+    {
+      "ga": "2/1/27",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "113",
+      "funktion": "Jalousie-Rechts",
+      "kommentar": "Mit 1 Komplett herunter fahren,\nmit 0 Komplett herauf fahren."
+    },
+    {
+      "ga": "1/1/24",
+      "DPT": "DPT5",
+      "gebaeude": "H",
+      "raum": "110",
+      "funktion": "Licht",
+      "kommentar": "Dimmen von 0 bis 255."
+    },
+    {
+      "ga": "1/1/23",
+      "DPT": "DPT3",
+      "gebaeude": "H",
+      "raum": "110",
+      "funktion": "Licht",
+      "kommentar": "Dimmen funktioniert nicht richtig."
+    },
+    {
+      "ga": "1/1/22",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "110",
+      "funktion": "Licht",
+      "kommentar": "Licht an."
+    },
+    {
+      "ga": "2/1/22",
+      "DPT": "DPT1",
+      "gebaeude": "H",
+      "raum": "111",
+      "funktion": "Jalusie",
+      "kommentar": "Tick hoch 0, Tick runter 1."
     }
   ]
 }
