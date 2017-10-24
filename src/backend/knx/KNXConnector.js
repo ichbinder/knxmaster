@@ -33,6 +33,7 @@ export default class KNXConnector {
   **/
   connect() {
     return new Promise( ( resolve, reject ) => {
+      console.log( 'test_after_knxconn!' );
       const connection = new knx.Connection( {
         ipAddr: this.ipAddr,
         ipPort: this.ipPort,

@@ -11,7 +11,7 @@ import KNXScan from '../knx/KNXScan';
 const FILE_TO_WATCH = path.resolve( __dirname, '../log/knxscan.log' );
 
 // Hier muss die IP des KNX-Routers eingetragen werden.
-const IP = '141.45.187.88';
+const IP = '141.45.187.222';
 // const IP = '192.168.3.110';
 
 // der Path zu den JSON-Datenbanken
@@ -30,7 +30,7 @@ apiDB.defaults( { ga: [] } )
 
 export default function create( ) {
   const router = new express.Router();
-
+  console.log( 'test_for!' );
 
   KNXConnector.create( IP )
     .then( ( connection ) => {
@@ -42,7 +42,9 @@ export default function create( ) {
         * connection.read - versucht eine Response ab zufangen, das klappt aber
         * er nur bei alten geräten
       **/
+      console.log( 'test_after!  ', connection );
       router.post( '/writeDpt', ( req, res ) => {
+        console.log( 'jojo' );
         console.log( req.body.ga, req.body.value, req.body.dpt );
         connection.write( req.body.ga, req.body.value, req.body.dpt );
         let timeOut = false;

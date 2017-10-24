@@ -40,7 +40,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var FILE_TO_WATCH = _path2.default.resolve(__dirname, '../log/knxscan.log');
 
 // Hier muss die IP des KNX-Routers eingetragen werden.
-var IP = '141.45.187.88';
+var IP = '141.45.187.222';
 // const IP = '192.168.3.110';
 
 // der Path zu den JSON-Datenbanken
@@ -57,6 +57,7 @@ apiDB.defaults({ ga: [] }).write();
 
 function create() {
   var router = new _express2.default.Router();
+  console.log('test_for!');
 
   _KNXConnector2.default.create(IP).then(function (connection) {
     /**
@@ -67,7 +68,9 @@ function create() {
       * connection.read - versucht eine Response ab zufangen, das klappt aber
       * er nur bei alten geräten
     **/
+    console.log('test_after!  ', connection);
     router.post('/writeDpt', function (req, res) {
+      console.log('jojo');
       console.log(req.body.ga, req.body.value, req.body.dpt);
       connection.write(req.body.ga, req.body.value, req.body.dpt);
       var timeOut = false;

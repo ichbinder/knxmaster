@@ -35686,9 +35686,13 @@
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
-	var _rcSlider = __webpack_require__(216);
+	var _reJalousie = __webpack_require__(371);
 	
-	var _rcSlider2 = _interopRequireDefault(_rcSlider);
+	var _reJalousie2 = _interopRequireDefault(_reJalousie);
+	
+	var _reJalousieTick = __webpack_require__(372);
+	
+	var _reJalousieTick2 = _interopRequireDefault(_reJalousieTick);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -35714,48 +35718,12 @@
 	    var _this = _possibleConstructorReturn(this, (ReMainRaum113.__proto__ || Object.getPrototypeOf(ReMainRaum113)).call(this, props));
 	
 	    _this.state = {
-	      marks: {
-	        0: { style: { color: 'black' }, label: 'Zu' },
-	        1: { style: { color: 'black' }, label: 'STOP' },
-	        2: { style: { color: 'black' }, label: 'Auf' }
-	      },
-	      responseOnOffLeft: {
-	        pa: '',
-	        value: ''
-	      },
-	      responseOnOffRight: {
-	        pa: '',
-	        value: ''
-	      }
+	      name: 'test'
 	    };
-	    _this._handleJLingsChange = _this._handleJLingsChange.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(ReMainRaum113, [{
-	    key: '_handleJLingsChange',
-	    value: function _handleJLingsChange(value) {
-	      var _this2 = this;
-	
-	      var telegramm = {
-	        ga: '2/1/19',
-	        value: 1,
-	        dpt: 'DPT1'
-	      };
-	      if (Object.keys(this.state.marks)[value] === '1') {
-	        telegramm.ga = '2/1/20';
-	      } else if (Object.keys(this.state.marks)[value] === '2') {
-	        telegramm.value = 0;
-	      }
-	      _axios2.default.post('/api/writeDpt', telegramm).then(function (response) {
-	        _this2.state.responseOnOffLeft.pa = response.data.pa;
-	        _this2.state.responseOnOffLeft.value = response.data.value.data[0];
-	        _this2.setState(_this2.state);
-	      }).catch(function (error) {
-	        console.log(error);
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -35773,16 +35741,33 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'raum113' },
-	          _react2.default.createElement(_rcSlider2.default, {
-	            vertical: true,
-	            min: 0,
-	            max: 2,
-	            marks: this.state.marks,
-	            step: null,
-	            defaultValue: 1,
-	            onAfterChange: this._handleJLingsChange,
-	            included: false
-	          })
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Jalousie'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'jalousie-ordnung' },
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              'Lings',
+	              _react2.default.createElement('p', null),
+	              _react2.default.createElement(_reJalousie2.default, { openCloseGa: '2/1/19', tickGa: '2/1/20', name: 'Jalousie' }),
+	              'Tick',
+	              _react2.default.createElement(_reJalousieTick2.default, { tickGa: '2/1/20', name: 'Jalousie Tick' })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              'Rechts',
+	              _react2.default.createElement('p', null),
+	              _react2.default.createElement(_reJalousie2.default, { openCloseGa: '2/1/19', tickGa: '2/1/20', name: 'Jalousie' }),
+	              'Tick',
+	              _react2.default.createElement(_reJalousieTick2.default, { tickGa: '2/1/20', name: 'Jalousie Tick' })
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -35790,6 +35775,257 @@
 	
 	  return ReMainRaum113;
 	}(_react2.default.Component);
+
+/***/ }),
+/* 371 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(181);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _axios = __webpack_require__(183);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	var _rcSlider = __webpack_require__(216);
+	
+	var _rcSlider2 = _interopRequireDefault(_rcSlider);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+	_axios2.default.defaults.baseURL = 'http://localhost:8020/';
+	
+	/**
+	  * dies ist eine Test webseite um die Jalousien von Raum 001 im Gebäude zu steuern.
+	**/
+	
+	var Jalousie = function (_React$Component) {
+	  _inherits(Jalousie, _React$Component);
+	
+	  _createClass(Jalousie, null, [{
+	    key: 'propTypes',
+	    get: function get() {
+	      return {
+	        openCloseGa: _react2.default.PropTypes.string,
+	        tickGa: _react2.default.PropTypes.string,
+	        name: _react2.default.PropTypes.string
+	      };
+	    }
+	  }]);
+	
+	  function Jalousie(props) {
+	    _classCallCheck(this, Jalousie);
+	
+	    var _this = _possibleConstructorReturn(this, (Jalousie.__proto__ || Object.getPrototypeOf(Jalousie)).call(this, props));
+	
+	    _this.state = {
+	      marks: {
+	        0: { style: { color: 'black' }, label: 'Zu' },
+	        1: { style: { color: 'black' }, label: 'STOP' },
+	        2: { style: { color: 'black' }, label: 'Auf' }
+	      },
+	      responseOnOff: {
+	        pa: '',
+	        value: ''
+	      }
+	
+	    };
+	    _this._handleJLingsChange = _this._handleJLingsChange.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(Jalousie, [{
+	    key: '_handleJLingsChange',
+	    value: function _handleJLingsChange(value) {
+	      var _this2 = this;
+	
+	      var telegramm = {
+	        ga: this.props.openCloseGa,
+	        value: 1,
+	        dpt: 'DPT1'
+	      };
+	      if (Object.keys(this.state.marks)[value] === '1') {
+	        telegramm.ga = this.props.tickGa;
+	      } else if (Object.keys(this.state.marks)[value] === '2') {
+	        telegramm.value = 0;
+	      }
+	      _axios2.default.post('/api/writeDpt', telegramm).then(function (response) {
+	        _this2.state.responseOnOff.pa = response.data.pa;
+	        _this2.state.responseOnOff.value = response.data.value.data[0];
+	        _this2.setState(_this2.state);
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'jalousie' },
+	        _react2.default.createElement(_rcSlider2.default, {
+	          vertical: true,
+	          min: 0,
+	          max: 2,
+	          marks: this.state.marks,
+	          step: null,
+	          defaultValue: 1,
+	          onAfterChange: this._handleJLingsChange,
+	          included: false
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return Jalousie;
+	}(_react2.default.Component);
+	
+	exports.default = Jalousie;
+
+/***/ }),
+/* 372 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(181);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _axios = __webpack_require__(183);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	var _rcSlider = __webpack_require__(216);
+	
+	var _rcSlider2 = _interopRequireDefault(_rcSlider);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+	_axios2.default.defaults.baseURL = 'http://localhost:8020/';
+	
+	/**
+	  * dies ist eine Test webseite um die Jalousien von Raum 001 im Gebäude zu steuern.
+	**/
+	
+	var JalousieTick = function (_React$Component) {
+	  _inherits(JalousieTick, _React$Component);
+	
+	  _createClass(JalousieTick, null, [{
+	    key: 'propTypes',
+	    get: function get() {
+	      return {
+	        tickGa: _react2.default.PropTypes.string,
+	        name: _react2.default.PropTypes.string
+	      };
+	    }
+	  }]);
+	
+	  function JalousieTick(props) {
+	    _classCallCheck(this, JalousieTick);
+	
+	    var _this = _possibleConstructorReturn(this, (JalousieTick.__proto__ || Object.getPrototypeOf(JalousieTick)).call(this, props));
+	
+	    _this.state = {
+	      responseOnOff: {
+	        pa: '',
+	        value: ''
+	      }
+	    };
+	    _this._handleTickUpChange = _this._handleTickUpChange.bind(_this);
+	    _this._handleTickDownChange = _this._handleTickDownChange.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(JalousieTick, [{
+	    key: '_handleTickUpChange',
+	    value: function _handleTickUpChange() {
+	      var _this2 = this;
+	
+	      var telegramm = {
+	        ga: this.props.tickGa,
+	        value: 1,
+	        dpt: 'DPT1'
+	      };
+	      _axios2.default.post('/api/writeDpt', telegramm).then(function (response) {
+	        _this2.state.responseOnOff.pa = response.data.pa;
+	        _this2.state.responseOnOff.value = response.data.value.data[0];
+	        _this2.setState(_this2.state);
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: '_handleTickDownChange',
+	    value: function _handleTickDownChange() {
+	      var _this3 = this;
+	
+	      var telegramm = {
+	        ga: this.props.tickGa,
+	        value: 0,
+	        dpt: 'DPT1'
+	      };
+	      _axios2.default.post('/api/writeDpt', telegramm).then(function (response) {
+	        _this3.state.responseOnOff.pa = response.data.pa;
+	        _this3.state.responseOnOff.value = response.data.value.data[0];
+	        _this3.setState(_this3.state);
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'tick' },
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn', onClick: this._handleTickUpChange },
+	          'H'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn', onClick: this._handleTickDownChange },
+	          'R'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return JalousieTick;
+	}(_react2.default.Component);
+	
+	exports.default = JalousieTick;
 
 /***/ })
 /******/ ]);

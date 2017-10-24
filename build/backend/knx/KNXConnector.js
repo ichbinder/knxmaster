@@ -56,6 +56,7 @@ var KNXConnector = function () {
       var _this = this;
 
       return new Promise(function (resolve, reject) {
+        console.log('test_after_knxconn!');
         var connection = new _knx2.default.Connection({
           ipAddr: _this.ipAddr,
           ipPort: _this.ipPort,
