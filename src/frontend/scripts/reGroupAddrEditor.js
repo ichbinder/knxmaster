@@ -5,8 +5,8 @@ import Ga300x from './reGa300x';
 import Ga500x from './reGa500x';
 
 // die URL zur Backend RestAPI um mit /api/getAllGaOfDPT die GA abzurufen
-// const SERVER_URL = 'http://playground.cm.htw-berlin.de:8020';
-const SERVER_URL = 'http://localhost:8020';
+const SERVER_URL = 'http://playground.cm.htw-berlin.de:8020';
+// const SERVER_URL = 'http://localhost:8020';
 
 /**
   * Die Webseite die das Analysieren von GA und DPT bereitstellt

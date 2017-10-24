@@ -57,7 +57,6 @@ apiDB.defaults({ ga: [] }).write();
 
 function create() {
   var router = new _express2.default.Router();
-  console.log('test_for!');
 
   _KNXConnector2.default.create(IP).then(function (connection) {
     /**
@@ -68,10 +67,8 @@ function create() {
       * connection.read - versucht eine Response ab zufangen, das klappt aber
       * er nur bei alten geräten
     **/
-    console.log('test_after!  ', connection);
     router.post('/writeDpt', function (req, res) {
-      console.log('jojo');
-      console.log(req.body.ga, req.body.value, req.body.dpt);
+      // console.log( req.body.ga, req.body.value, req.body.dpt );
       connection.write(req.body.ga, req.body.value, req.body.dpt);
       var timeOut = false;
       setTimeout(function () {

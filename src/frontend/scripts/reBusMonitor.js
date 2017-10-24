@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // die URL zum WebSocket. Er dient zum stream für den BusMonitor.
-// const socket = new WebSocket( 'ws://playground.cm.htw-berlin.de:8020/api/busMonitor' );
-const socket = new WebSocket( 'ws://localhost:8020/api/busMonitor' );
+const socket = new WebSocket( 'ws://playground.cm.htw-berlin.de:8020/api/busMonitor' );
+// const socket = new WebSocket( 'ws://localhost:8020/api/busMonitor' );
 
 /**
   * Dies bildet die Webseite Bus-Monitor dort kann man den angeschlossenden

@@ -30,7 +30,6 @@ apiDB.defaults( { ga: [] } )
 
 export default function create( ) {
   const router = new express.Router();
-  console.log( 'test_for!' );
 
   KNXConnector.create( IP )
     .then( ( connection ) => {
@@ -42,10 +41,8 @@ export default function create( ) {
         * connection.read - versucht eine Response ab zufangen, das klappt aber
         * er nur bei alten geräten
       **/
-      console.log( 'test_after!  ', connection );
       router.post( '/writeDpt', ( req, res ) => {
-        console.log( 'jojo' );
-        console.log( req.body.ga, req.body.value, req.body.dpt );
+        // console.log( req.body.ga, req.body.value, req.body.dpt );
         connection.write( req.body.ga, req.body.value, req.body.dpt );
         let timeOut = false;
         setTimeout( () => { timeOut = true; res.json( { error: 'no connection.' } ); }, 3000 );

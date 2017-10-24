@@ -21819,8 +21819,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	// axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
-	_axios2.default.defaults.baseURL = 'http://localhost:8020/';
+	_axios2.default.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+	// axios.defaults.baseURL = 'http://localhost:8020/';
 	
 	/**
 	  * dies ist eine Test webseite um die Jalousien von Raum 001 im Gebäude zu steuern.
@@ -25637,8 +25637,8 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	// die URL zur Backend RestAPI um mit /api/getAllGaOfDPT die GA abzurufen
-	// const SERVER_URL = 'http://playground.cm.htw-berlin.de:8020';
-	var SERVER_URL = 'http://localhost:8020';
+	var SERVER_URL = 'http://playground.cm.htw-berlin.de:8020';
+	// const SERVER_URL = 'http://localhost:8020';
 	
 	/**
 	  * Die Webseite die das Analysieren von GA und DPT bereitstellt
@@ -35294,8 +35294,8 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	// die URL zur Backend RestAPI um mit /api/getAllGaOfDPT die GA abzurufen
-	// axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
-	_axios2.default.defaults.baseURL = 'http://localhost:8020/';
+	_axios2.default.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+	// axios.defaults.baseURL = 'http://localhost:8020/';
 	
 	/**
 	  * Dies ist die Webseite die es ermöglicht den KNX-Bus auf Busteilnehmer zu Scannen
@@ -35412,8 +35412,8 @@
 	
 	// öffnet ein Websocket zum Backend um so die erscanten ergebnisse von PA
 	// in die Webseite zu hollen
-	// const exampleSocket = new WebSocket( 'ws://playground.cm.htw-berlin.de:8020/api/getScanResoult' );
-	var exampleSocket = new WebSocket('ws://localhost:8020/api/getScanResoult');
+	var exampleSocket = new WebSocket('ws://playground.cm.htw-berlin.de:8020/api/getScanResoult');
+	// const exampleSocket = new WebSocket( 'ws://localhost:8020/api/getScanResoult' );
 	
 	/**
 	  * Dies ist eine Module das in die Webseite reScanKnx geldaen wird.
@@ -35523,8 +35523,8 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	// die URL zum WebSocket. Er dient zum stream für den BusMonitor.
-	// const socket = new WebSocket( 'ws://playground.cm.htw-berlin.de:8020/api/busMonitor' );
-	var socket = new WebSocket('ws://localhost:8020/api/busMonitor');
+	var socket = new WebSocket('ws://playground.cm.htw-berlin.de:8020/api/busMonitor');
+	// const socket = new WebSocket( 'ws://localhost:8020/api/busMonitor' );
 	
 	/**
 	  * Dies bildet die Webseite Bus-Monitor dort kann man den angeschlossenden
@@ -35702,8 +35702,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	// axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
-	_axios2.default.defaults.baseURL = 'http://localhost:8020/';
+	_axios2.default.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+	// axios.defaults.baseURL = 'http://localhost:8020/';
 	
 	/**
 	  * dies ist eine Test webseite um die Jalousien von Raum 001 im Gebäude zu steuern.
@@ -35808,8 +35808,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	// axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
-	_axios2.default.defaults.baseURL = 'http://localhost:8020/';
+	_axios2.default.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+	// axios.defaults.baseURL = 'http://localhost:8020/';
 	
 	/**
 	  * dies ist eine Test webseite um die Jalousien von Raum 001 im Gebäude zu steuern.
@@ -35930,8 +35930,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	// axios.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
-	_axios2.default.defaults.baseURL = 'http://localhost:8020/';
+	_axios2.default.defaults.baseURL = 'http://playground.cm.htw-berlin.de:8020/';
+	// axios.defaults.baseURL = 'http://localhost:8020/';
 	
 	/**
 	  * dies ist eine Test webseite um die Jalousien von Raum 001 im Gebäude zu steuern.

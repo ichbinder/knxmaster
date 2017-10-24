@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 
 // öffnet ein Websocket zum Backend um so die erscanten ergebnisse von PA
 // in die Webseite zu hollen
-// const exampleSocket = new WebSocket( 'ws://playground.cm.htw-berlin.de:8020/api/getScanResoult' );
-const exampleSocket = new WebSocket( 'ws://localhost:8020/api/getScanResoult' );
+const exampleSocket = new WebSocket( 'ws://playground.cm.htw-berlin.de:8020/api/getScanResoult' );
+// const exampleSocket = new WebSocket( 'ws://localhost:8020/api/getScanResoult' );
 
 /**
   * Dies ist eine Module das in die Webseite reScanKnx geldaen wird.
