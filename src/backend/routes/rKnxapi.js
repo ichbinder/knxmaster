@@ -80,7 +80,7 @@ export default function create( ) {
         console.log( 'socket', req.testing );
       } );
     } )
-    .catch( err => console.log( 'Error:', err ) );
+    .catch( err => console.log( 'Error ws:', err ) );
 
   /**
     * Bei dieser Funktion wird die LogFile per Websoket an die webseite geschickt.
